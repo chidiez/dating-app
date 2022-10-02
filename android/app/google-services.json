@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "191609045454",
+    "firebase_url": "https://node-mcu-35d85-default-rtdb.firebaseio.com",
+    "project_id": "node-mcu-35d85",
+    "storage_bucket": "node-mcu-35d85.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191609045454:android:3efc762b1f319bdfa6eb9f",
+        "android_client_info": {
+          "package_name": "tech.neorac.vanilla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191609045454-r046kc6g5pqe69qakd2d9u44kija0e3g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA47cFB2R5xGLMT8LHla9V8XSD02-mpXYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191609045454-r046kc6g5pqe69qakd2d9u44kija0e3g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "191609045454-lbc27nkgqrrb46uhubuvklgg8lio6j8h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tech.neorac.vanillaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
