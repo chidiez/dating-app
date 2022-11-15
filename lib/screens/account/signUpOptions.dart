@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vanilla/services/firebaseServices.dart';
 
-
 import '../../widgets/textWidget.dart';
 import 'logIn.dart';
 
@@ -31,10 +30,14 @@ class _SigningOptionsState extends State<SigningOptions> {
           ),
           const SizedBox(height: 25),
           Padding(
-            padding: const EdgeInsets.only(left: 25, right: 25,),
+            padding: const EdgeInsets.only(
+              left: 25,
+              right: 25,
+            ),
             child: TextWidget(
               align: TextAlign.center,
-              text: 'Access profile, meet other people, chat, talk, establish friends, agree to meet, and more.',
+              text:
+                  'Access profile, meet other people, chat, talk, establish friends, agree to meet, and more.',
               fontSize: 14,
               color: const Color(0xFF000000),
               fontWeight: FontWeight.w500,
@@ -55,21 +58,20 @@ class _SigningOptionsState extends State<SigningOptions> {
                 shadowColor: Colors.white,
                 side: const BorderSide(color: Color(0xFFB81F8F)),
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(3),
                 ),
                 backgroundColor: Colors.white,
               ),
               child: const Text(
                 'Use phone / email',
                 style: TextStyle(
-                    fontSize: 18, color: Colors.black, fontFamily: 'Proxima Nova'),
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontFamily: 'Proxima Nova'),
               ),
             ),
           ),
-
           const SizedBox(height: 15),
-
           SizedBox(
             width: 300,
             height: 40,
@@ -82,21 +84,20 @@ class _SigningOptionsState extends State<SigningOptions> {
                 shadowColor: Colors.white,
                 side: const BorderSide(color: Color(0xFFB81F8F)),
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(3),
                 ),
                 backgroundColor: Colors.white,
               ),
               child: const Text(
                 'Continue with Facebook',
                 style: TextStyle(
-                    fontSize: 18, color: Colors.black, fontFamily: 'Proxima Nova'),
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontFamily: 'Proxima Nova'),
               ),
             ),
           ),
-
           const SizedBox(height: 15),
-
           SizedBox(
             width: 300,
             height: 40,
@@ -109,25 +110,23 @@ class _SigningOptionsState extends State<SigningOptions> {
                 shadowColor: Colors.white,
                 side: const BorderSide(color: Color(0xFFB81F8F)),
                 shape: RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(3),
+                  borderRadius: BorderRadius.circular(3),
                 ),
                 backgroundColor: Colors.white,
               ),
               child: const Text(
                 'Continue with Google',
                 style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontFamily: 'Proxima Nova',
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontFamily: 'Proxima Nova',
                 ),
               ),
             ),
           ),
-
           const SizedBox(height: 15),
 
-         /* SizedBox(
+          /* SizedBox(
             width: 300,
             height: 40,
             child: ElevatedButton(
@@ -149,23 +148,24 @@ class _SigningOptionsState extends State<SigningOptions> {
             ),
           ), */
 
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           const Text(
             'You have to be 18 or older to create a profile.',
             style: TextStyle(
-                color: Colors.black45, fontSize: 14, fontFamily: 'Proxima Nova',),
+              color: Colors.black45,
+              fontSize: 14,
+              fontFamily: 'Proxima Nova',
+            ),
           ),
-
           const Spacer(),
-
           Center(
-
             child: RichText(
               text: const TextSpan(
                 children: [
                   TextSpan(
-                    text:
-                    'By continuing, you agree to our ',
+                    text: 'By continuing, you agree to our ',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 13,
@@ -184,8 +184,7 @@ class _SigningOptionsState extends State<SigningOptions> {
                     ),
                   ),
                   TextSpan(
-                    text:
-                    ' and \nacknowledge that you have read our ',
+                    text: ' and \nacknowledge that you have read our ',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 13,
@@ -205,7 +204,7 @@ class _SigningOptionsState extends State<SigningOptions> {
                   ),
                   TextSpan(
                     text:
-                    ' to \nlearn how we collect, use and share your data.  ',
+                        ' to \nlearn how we collect, use and share your data.  ',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 13,
@@ -217,18 +216,14 @@ class _SigningOptionsState extends State<SigningOptions> {
               ),
             ),
           ),
-
           const SizedBox(height: 20),
-
           Container(
             color: const Color(0xFFB81F8F),
             height: 60,
             width: double.infinity,
           ),
-
         ],
       ),
-
     );
   }
 }

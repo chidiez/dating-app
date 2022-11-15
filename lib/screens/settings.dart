@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vanilla/widgets/subscribeCard.dart';
+import 'package:vanilla/widgets/buttonWidget.dart';
+import 'package:vanilla/widgets/textWidget.dart';
+import 'package:vanilla/screens/filterExplore.dart';
 
-import '../widgets/buttonWidget.dart';
-import '../widgets/subscribePopUp.dart';
-import '../widgets/textWidget.dart';
+import 'account/signUpOptions.dart';
 
 class settingScreen extends StatefulWidget {
   const settingScreen({Key? key}) : super(key: key);
@@ -31,165 +33,133 @@ class _settingScreenState extends State<settingScreen> {
         backgroundColor: Colors.white10,
         actions: [
           IconButton(
-            icon: Image.asset('assets/icons/filter.png', color: Colors.black87,),
+            icon: Image.asset(
+              'assets/icons/filter.png',
+              color: Colors.black87,
+            ),
             onPressed: () {
-              // handle the press
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const FilterExplorePage()));
             },
           ),
         ],
       ),
       body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 130,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SubBanner(),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.only(
+                left: 5,
+                top: 10,
+                right: 5,
+              ),
+              //height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              color: const Color(0xFFB81F8F),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 13,
-                  ),
                   TextWidget(
-                    text: "You're on our free plan",
-                    fontSize: 20,
-                    isUnderLine: true,
-                    color: Colors.white,
+                    text: 'General',
+                    fontSize: 14,
+                    color: Colors.grey,
                     fontWeight: FontWeight.w400,
                   ),
+                  ButtonNextWidget(
+                    text: 'Push Notifications',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const settingScreen()));
+                    },
+                    icon: Icons.arrow_forward_ios,
+                    option: '',
+                  ),
+                  const Divider(),
+                  ButtonNextWidget(
+                    text: 'Language',
+                    onTap: () {},
+                    icon: Icons.arrow_forward_ios,
+                    option: 'Coming soon',
+                  ),
+                  const Divider(),
+                  ButtonNextWidget(
+                    text: 'Share App',
+                    onTap: () {},
+                    icon: Icons.arrow_forward_ios,
+                    option: '',
+                  ),
                   TextWidget(
-                    text: 'You want to make the most out of Vanilla?',
-                    fontSize: 16,
-                    isUnderLine: true,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                    text: 'Help & Support',
+                    fontSize: 14,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w400,
                   ),
-                  const SizedBox(
-                    height: 15,
+                  ButtonNextWidget(
+                    text: 'Send us Feedback',
+                    onTap: () {},
+                    icon: Icons.arrow_forward_ios,
+                    option: '',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 40,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) => subscribeButton());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          backgroundColor: Colors.white,
-                        ),
-                        child: const Text(
-                          'Become VIP member',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontFamily: "Proxima Nova",
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
+                  const Divider(),
+                  ButtonNextWidget(
+                    text: 'Privacy Policy',
+                    onTap: () {},
+                    icon: Icons.arrow_forward_ios,
+                    option: '',
+                  ),
+                  const Divider(),
+                  ButtonNextWidget(
+                    text: 'Terms & Conditions',
+                    onTap: () {},
+                    icon: Icons.arrow_forward_ios,
+                    option: '',
+                  ),
+                  TextWidget(
+                    text: 'Account',
+                    fontSize: 14,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  ButtonNextWidget(
+                    text: 'Delete Account',
+                    onTap: () {},
+                    icon: Icons.arrow_forward_ios,
+                    option: '',
+                  ),
+                  const Divider(),
+                  ButtonNextWidget(
+                    text: 'Log Out',
+                    onTap: () {
+                      FirebaseAuth.instance.signOut();
+                      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                          const SigningOptions()), (Route<dynamic> route) => false);
+                    },
+                    icon: Icons.arrow_forward_ios,
+                    option: '',
+                  ),
+                  Spacer(),
+                  Center(
+                    child: TextWidget(
+                      align: TextAlign.center,
+                      text: '© Vanilla. 2022. \nDeveloped by neorac.tech',
+                      fontSize: 13,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
+                  const SizedBox(height: 10,)
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                padding: const EdgeInsets.only(
-                  left: 5,
-                  top: 10,
-                  right: 5,
-                ),
-                //height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextWidget(
-                      text: 'General',
-                      fontSize: 14,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    ButtonNextWidget(
-                      text: 'Push Notifications',
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const settingScreen()));
-                      },
-                      icon: Icons.arrow_forward_ios, option: '',
-                    ),
-                    const Divider(),
-                    ButtonNextWidget(
-                      text: 'Language',
-                      onTap: () {},
-                      icon: Icons.arrow_forward_ios,
-                      option: 'Coming soon',
-                    ),
-                    const Divider(),
-                    ButtonNextWidget(
-                      text: 'Share App',
-                      onTap: () {},
-                      icon: Icons.arrow_forward_ios, option: '',
-                    ),
-                    TextWidget(
-                      text: 'Help & Support',
-                      fontSize: 14,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    ButtonNextWidget(
-                      text: 'Send us Feedback',
-                      onTap: () {},
-                      icon: Icons.arrow_forward_ios, option: '',
-                    ),
-                    const Divider(),
-                    ButtonNextWidget(
-                      text: 'Privacy Policy',
-                      onTap: () {},
-                      icon: Icons.arrow_forward_ios, option: '',
-                    ),
-                    const Divider(),
-                    ButtonNextWidget(
-                      text: 'Terms & Conditions',
-                      onTap: () {},
-                      icon: Icons.arrow_forward_ios, option: '',
-                    ),
-                    TextWidget(
-                      text: 'Account',
-                      fontSize: 14,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    ButtonNextWidget(
-                      text: 'Delete Account',
-                      onTap: () {},
-                      icon: Icons.arrow_forward_ios, option: '',
-                    ),
-                    const Divider(),
-                    ButtonNextWidget(
-                      text: 'Log Out',
-                      onTap: () {
-                        FirebaseAuth.instance.signOut();
-                      },
-                      icon: Icons.arrow_forward_ios, option: '',
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-
+          ),
+        ],
+      ),
     );
   }
 }
-

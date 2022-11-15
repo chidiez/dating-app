@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:vanilla/nav/bottomNav.dart';
+import 'package:vanilla/screens/account/agreement.dart';
 import 'package:vanilla/screens/account/imagePicker.dart';
 import 'package:vanilla/screens/account/logIn.dart';
 import 'package:vanilla/screens/account/profileSetUp.dart';
@@ -22,7 +23,7 @@ Future main() async {
     //options: DefaultFirebaseOptions.currentPlatform,
   );
   if (kIsWeb) {
-    FacebookAuth.i.webInitialize(
+    FacebookAuth.i.webAndDesktopInitialize(
       appId: "1951600555051255",
       cookie: true,
       xfbml: true,
@@ -46,12 +47,12 @@ class MyApp extends StatelessWidget {
         title: title,
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
-        home: const ProfileImagesScreen(),
+        //home: const SetProfilePage(),
         //home: AuthService().handleAuthState(),
-        //home: MainPage(),
+        home: MainPage(),
         theme: ThemeData(
             //textTheme: GoogleFonts.proximaNovaTextTheme(Theme.of(context).textTheme),
-            primarySwatch: Colors.purple, splashColor: Colors.transparent),
+            primarySwatch: Colors.pink, splashColor: Colors.transparent),
       );
 }
 

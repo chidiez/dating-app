@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vanilla/screens/editProfile.dart';
 import 'package:vanilla/screens/settings.dart';
+import 'package:vanilla/widgets/subscribeCard.dart';
 
 import '../../widgets/subscribePopUp.dart';
 import '../../widgets/textWidget.dart';
@@ -15,13 +17,15 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         title: TextWidget(
-          text: 'Ezed, 25',
-          fontSize: 20,
+          text: user.displayName!,
+          fontSize: 17,
           color: const Color(0xFFB81F8F),
           fontWeight: FontWeight.w500,
         ),
@@ -65,14 +69,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children:  [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text("Likes", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),),
                     Text("191", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
                   ],
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text("Views", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w300),),
                     Text("220", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),),
                   ],
@@ -80,59 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             const SizedBox(height: 23,),
-            Container(
-              height: 130,
-              width: MediaQuery.of(context).size.width,
-              color: Color(0xFFB81F8F),
-              child: Column(
-                children:  [
-                  const SizedBox(height: 13,),
-                  TextWidget(
-                    text: "You're on our free plan",
-                    fontSize: 22,
-                    isUnderLine: true,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
-                  TextWidget(
-                    text: "You're on our free plan",
-                    fontSize: 16,
-                    color: Colors.white,
-                    isUnderLine: true,
-                    fontWeight: FontWeight.w300,
-                  ),
-                  const SizedBox(height: 15,),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 40,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) => subscribeButton());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          backgroundColor: Colors.white,
-                        ),
-                        child: const Text(
-                          'Become VIP member',
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontFamily: "Avenir",
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            const SubBanner(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

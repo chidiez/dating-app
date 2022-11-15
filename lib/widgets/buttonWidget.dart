@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class ButtonWidget extends StatelessWidget {
-  final Function? onPressed;
+  final  onPressed;
   final String text;
 
   const ButtonWidget({
@@ -17,9 +17,9 @@ class ButtonWidget extends StatelessWidget {
       width: double.infinity,
       height: 40,
       child: ElevatedButton(
-        onPressed: (){} ,
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFFB81F8F),
+          backgroundColor: const Color(0xFFB81F8F),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
@@ -37,6 +37,46 @@ class ButtonWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+class RegButtonWidget extends StatelessWidget {
+  final  onPressed;
+  final String text;
+
+  const RegButtonWidget({
+    Key? key,
+    required this.onPressed,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 40,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: const Color(0xFFB81F8F),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          //backgroundColor: Colors.purple,
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(
+            fontSize: 17,
+            fontFamily: 'Proxima Nova',
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 
 

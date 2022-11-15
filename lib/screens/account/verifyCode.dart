@@ -2,9 +2,9 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../nav/bottomNav.dart';
-import '../../widgets/buttonWidget.dart';
-import '../../widgets/textWidget.dart';
+import 'package:vanilla/screens/account/profileSetUp.dart';
+import 'package:vanilla/widgets/buttonWidget.dart';
+import 'package:vanilla/widgets/textWidget.dart';
 
 class VerifyCode extends StatefulWidget {
   const VerifyCode({Key? key}) : super(key: key);
@@ -66,7 +66,7 @@ class _VerifyCodeState extends State<VerifyCode> {
   }
   @override
   Widget build(BuildContext context) => isEmailVerified
-      ? const BottomNav()
+      ? const SetProfilePage()
       : Scaffold(
       appBar: AppBar(
         leading: const BackButton(
@@ -75,8 +75,8 @@ class _VerifyCodeState extends State<VerifyCode> {
         elevation: 0,
         centerTitle: true,
         title: TextWidget(
-          text: 'Enter your code',
-          fontSize: 22,
+          text: 'Verify Account',
+          fontSize: 20,
           color: const Color(0xFFB81F8F),
           fontWeight: FontWeight.w500,
         ),
@@ -95,20 +95,22 @@ class _VerifyCodeState extends State<VerifyCode> {
       ),
       body: Container(
         margin: const EdgeInsets.only(left: 10, right: 10),
-        //padding: const EdgeInsets.only(left: 5, right: 5,),
+        padding: const EdgeInsets.only(left: 20, right: 20,),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(height: 50,),
             TextWidget(
               text: 'A verification email has been sent to your mailbox.',
-              fontSize: 22,
-              color: const Color(0xFFB81F8F),
-              fontWeight: FontWeight.w500,
+              fontSize: 18,
+              //color: const Color(0xFFB81F8F),
+              color: Colors.black87,
+              fontWeight: FontWeight.normal,
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(height: 80,),
 
             ButtonWidget (onPressed: () => canResendEmail ? sendVerificationEmail() : null, text: 'Resend Email',),
             const SizedBox(height: 10,),

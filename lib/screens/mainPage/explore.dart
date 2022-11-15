@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import '../../widgets/exploreCardWidget.dart';
 import '../../widgets/favouritesList.dart';
 import '../../widgets/textWidget.dart';
+import '../filterExplore.dart';
 import 'favourites.dart';
+import 'package:http/http.dart' as http;
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
@@ -13,6 +17,23 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
+  List allOnlineUsers = [];
+  getNearByUsers() async {
+    var url = Uri.parse('https://hidden-mountain-66153.herokuapp.com/home');
+    var response = await http.get(url);
+    if(response.statusCode == 200){
+      var jsonResponse = jsonDecode(response.body) as List<dynamic>;
+      setState(() {
+        allOnlineUsers = jsonResponse;
+      });
+    }
+  }
+  @override
+  void initState() {
+    getNearByUsers();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -32,7 +53,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
             IconButton(
               icon: Image.asset('assets/icons/filter.png', color: Colors.black87,),
               onPressed: () {
-                // handle the press
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FilterExplorePage()));
               },
             ),
           ],

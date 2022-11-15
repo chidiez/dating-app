@@ -1,10 +1,11 @@
+import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:vanilla/nav/bottomNav.dart';
-
-import '../../widgets/buttonWidget.dart';
-import '../../widgets/imagePickerWidget.dart';
-import '../../widgets/textWidget.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:vanilla/widgets/buttonWidget.dart';
+import 'package:vanilla/widgets/textWidget.dart';
+import 'package:vanilla/screens/account/agreement.dart';
 
 class ProfileImagesScreen extends StatefulWidget {
   const ProfileImagesScreen({Key? key}) : super(key: key);
@@ -14,10 +15,15 @@ class ProfileImagesScreen extends StatefulWidget {
 }
 
 class _ProfileImagesScreenState extends State<ProfileImagesScreen> {
-
+  final ImagePicker _multiPicker = ImagePicker();
+  List<XFile> _selectedFiles = [];
+  FirebaseStorage _storageRef = FirebaseStorage.instance;
+  List<String> _arrImageUrls = [];
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(
@@ -26,8 +32,9 @@ class _ProfileImagesScreenState extends State<ProfileImagesScreen> {
         elevation: 0,
         centerTitle: true,
         title: TextWidget(
-          text: 'Gallery',
-          fontSize: 20,
+          text: user.displayName!,
+          //text: 'Gallery',
+          fontSize: 17,
           color: const Color(0xFFB81F8F),
           fontWeight: FontWeight.w500,
         ),
@@ -84,7 +91,7 @@ class _ProfileImagesScreenState extends State<ProfileImagesScreen> {
                       color: Colors.purple[200],
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: images!.isEmpty ? 
+                    child: images!.isEmpty ?
                     IconButton(
                       icon: Image.asset('assets/icons/add-image.png',),
                       onPressed: () { },
@@ -94,52 +101,114 @@ class _ProfileImagesScreenState extends State<ProfileImagesScreen> {
                   )),
                 )),*/
 
-
             //const SizedBox(height: 50,),
-
 
             Expanded(
               child: Column(
                 //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      ImagePickerWidget(),
-
-                      ImagePickerWidget(),
-
-                      ImagePickerWidget(),
-                    ],
+                  InkWell(
+                    onTap: () {
+                      selectImages();
+                    },
+                    child: Column(
+                      children: [
+                        Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                height: 170,
+                                width: 111,
+                                color: Colors.purple[100],
+                                child: IconButton(
+                                  icon: Image.asset(
+                                    'assets/icons/add-image.png',
+                                  ),
+                                  onPressed: () {},
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        _selectedFiles.isEmpty
+                            ? const Padding(
+                                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                child: Text('Select 5 or more images'),
+                              )
+                            : Expanded(
+                                child: GridView.builder(
+                                    itemCount: _selectedFiles.length,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 3),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.all(2),
+                                        child: Image.file(
+                                          File(_selectedFiles[index].path),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      );
+                                    }),
+                              )
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 10,),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      ImagePickerWidget(),
-
-                      ImagePickerWidget(),
-
-                      SizedBox(
-                        //height: 220,
-                        width: 111,
-                        //color: Colors.white10,
-                      ),
-                    ],
+                  const SizedBox(
+                    height: 10,
                   ),
-
                 ],
               ),
             ),
-            ButtonWidget (onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const BottomNav())), text: 'Continue',),
-            const SizedBox(height: 100,)
+            ButtonWidget(
+              onPressed: () {
+                uploadFunction(_selectedFiles);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const AgreementScreen()));
+              },
+              text: 'Continue',
+            ),
+            const SizedBox(
+              height: 50,
+            )
           ],
         ),
       ),
     );
+  }
+
+  void uploadFunction(List<XFile> _images){
+    for(int i=0 ; i<_images.length; i++){
+      var imageUrl = uploadFIle(_images[i]);
+      _arrImageUrls.add(imageUrl.toString());
+    }
+  }
+  
+  Future<String> uploadFIle(XFile _image) async {
+    Reference reference = _storageRef.ref().child("userImages").child(_image.name);
+    UploadTask uploadTask = reference.putFile(File(_image.path));
+    await uploadTask.whenComplete(() => {
+      print(reference.getDownloadURL())
+    });
+
+    return await reference.getDownloadURL();
+  }
+  
+  Future<void> selectImages() async {
+    if (_selectedFiles != null) {
+      _selectedFiles.clear();
+    }
+    try {
+      final List<XFile>? imgs = await _multiPicker.pickMultiImage();
+      if (imgs!.isNotEmpty) {
+        _selectedFiles.addAll(imgs);
+      }
+    } catch (e) {
+      print("Something went wrong. " + e.toString());
+    }
+    setState(() {});
   }
 }

@@ -68,9 +68,9 @@ class _EditMyContactState extends State<EditMyContact> {
                         ),
                         child:  Image.asset('assets/telephone.png', color: Colors.white, fit: BoxFit.scaleDown,),
                       ),
-                      SizedBox(width: 15,),
-                      Text('Phone',
-                          style: const TextStyle(
+                      const SizedBox(width: 15,),
+                      const Text('Phone',
+                          style: TextStyle(
                             fontSize: 14, height: 1.5, color: Colors.black,
                           ),
                       ),
@@ -110,9 +110,9 @@ class _EditMyContactState extends State<EditMyContact> {
                         ),
                         child:  Image.asset('assets/facebook.png', color: Colors.white, fit: BoxFit.scaleDown,),
                       ),
-                      SizedBox(width: 15,),
-                      Text('Facebook',
-                        style: const TextStyle(
+                      const SizedBox(width: 15,),
+                      const Text('Facebook',
+                        style: TextStyle(
                           fontSize: 14, height: 1.5, color: Colors.black,
                         ),
                       ),
@@ -152,9 +152,9 @@ class _EditMyContactState extends State<EditMyContact> {
                         ),
                         child:  Image.asset('assets/whatsapp.png', color: Colors.white, fit: BoxFit.scaleDown,),
                       ),
-                      SizedBox(width: 15,),
-                      Text('WhatsApp',
-                        style: const TextStyle(
+                      const SizedBox(width: 15,),
+                      const Text('WhatsApp',
+                        style: TextStyle(
                           fontSize: 14, height: 1.5, color: Colors.black,
                         ),
                       ),

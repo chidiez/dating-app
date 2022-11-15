@@ -43,8 +43,8 @@ class _TextInputState extends State<TextInput> {
               _isObscure = !_isObscure;
             });
           },
-          icon: Icon(_isObscure ? Icons.visibility_off : Icons.visibility),) : null,
-        hintStyle: TextStyle(
+          icon: Icon(_isObscure ? Icons.visibility_outlined : Icons.visibility_off_outlined),) : null,
+        hintStyle: const TextStyle(
             color: Color(0xFF9b9b9b),
             fontSize: 15,
             fontFamily: 'Proxima Nova',
